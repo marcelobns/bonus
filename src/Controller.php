@@ -1,7 +1,7 @@
 <?php
 /**
-* @Author Marcelo Barbosa
-* 2015-09-04
+* @author Marcelo Barbosa
+* 
 */
 namespace bonus;
 
