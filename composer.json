@@ -15,8 +15,6 @@
         "illuminate/database": "*"
     },
     "autoload": {
-        "psr-4": {
-            "Anotherwise\\Bonus\\": "src/"
-        }
+        "psr-4": {"Anotherwise\\Bonus\\": "src/"}
     }
 }

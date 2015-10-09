@@ -1,10 +1,10 @@
 <?php
 /**
 * @author Marcelo Barbosa
-* 
+*
 */
-namespace bonus;
-//TODO standalone SRC?
+namespace Anotherwise\Bonus;
+
 require_once(SRC."database.php");
 
 use Illuminate\Database\Capsule\Manager as Capsule;
@@ -14,6 +14,12 @@ class DatabaseCapsule extends Capsule {
     function __construct(){
         parent::__construct();
         $this->addConnection(Database::connection());
+        $this->setAsGlobal();
+        $this->bootEloquent();
+    }
+    function __construct($schema){
+        parent::__construct();
+        $this->addConnection(Database::connection($schema));
         $this->setAsGlobal();
         $this->bootEloquent();
     }

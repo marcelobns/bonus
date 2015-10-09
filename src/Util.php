@@ -1,9 +1,9 @@
 <?php
 /**
 * @author Marcelo Barbosa
-* 
+*
 */
-namespace bonus;
+namespace Anotherwise\Bonus;
 
 class Util {
     public static function dump($object){

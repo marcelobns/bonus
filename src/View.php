@@ -1,9 +1,9 @@
 <?php
 /**
 * @author Marcelo Barbosa
-* 
+*
 */
-namespace bonus;
+namespace Anotherwise\Bonus;
 
 class View {
 	private $compress = true;
@@ -16,10 +16,14 @@ class View {
 		ob_start(array($this,'compressor'));
 		if(file_exists($template)){
 			$this->flash = $this->getFlash();
-			require $layout;
+			if(file_exists($layout)){
+				require $layout;
+			} else {
+				require $template;
+			}
 		} else {
-			$page = "\\modules\\PagesController";
-			$page = new $page;
+			$error = MODULES."Errors";;
+			$page = new $error;
 			$page->error404();
 		}
 		ob_end_flush();

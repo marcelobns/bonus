@@ -1,9 +1,10 @@
 <?php
 /**
 * @author Marcelo Barbosa
-* 
+*
 */
-namespace bonus;
+namespace Anotherwise\Bonus;
+
 require_once(SRC."routes.php");
 
 class Permission {

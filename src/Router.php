@@ -1,32 +1,40 @@
 <?php
 /**
 * @author Marcelo Barbosa
-* 
 */
-namespace bonus;
+namespace Anotherwise\Bonus;
+
 require_once(SRC."routes.php");
 
 class Router {
-	private $pages = "\\modules\\PagesController";
-
 	function __construct(){
+		spl_autoload_register(array($this, "autoloader"));
 		session_start();
 		$this->mapping(@$_GET['url']);
+	}
+	function autoloader($class){
+	    $file = str_replace('\\', '/', $class).".php";
+	    if (file_exists($file)) {
+	        require_once($file);
+	    }
 	}
 	function mapping($url){
 		$map = $this->getRoute($url, Routes::map());
 		$controller = ucfirst($map['controller']);
-		$controller = "\\modules\\$controller";
+		$controller = MODULES.$controller;
+		$error = MODULES."Errors";
+
 		$action = @$map['action'];
 		$param = isset($map['param']) ? $map['param'] : array();
+
 		if(!Permission::check($url)){
-			$page = new $this->pages;
+			$page = new $error;
 			$page->error403();
 		} else if(class_exists($controller) && method_exists($controller, $action)) {
 			$controller = new $controller;
 			call_user_func_array(array($controller, $action), $param);
 		} else {
-			$page = new $this->pages;
+			$page = new $error;
 			$page->error404();
 		}
 	}

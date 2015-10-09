@@ -3,14 +3,18 @@
 * @author Marcelo Barbosa
 *
 */
-namespace bonus;
+namespace Anotherwise\Bonus;
 
 class Controller {
 	function __construct(){
 		$this->view = new View();
 	}
 	function __call($method,$arguments) {
-		call_user_func_array(array($this->view, $method), $arguments);
+		if(method_exists($this->view, $method)){
+			call_user_func_array(array($this->view, $method), $arguments);
+		} else {
+			throw new \Exception("Undefined method: $method()");
+		}
 	}
 	function request($method){
 		return (strtolower($_SERVER['REQUEST_METHOD']) == strtolower($method));

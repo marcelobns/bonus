@@ -2,7 +2,7 @@
 /**
  * @author Marcelo Barbosa
  */
-namespace bonus;
+namespace Anotherwise\Bonus;
 
 class Cache {
 
