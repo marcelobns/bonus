@@ -1,0 +1,22 @@
+{
+    "name": "anotherwise/bonus",
+    "description": "PHP Bonus Framework, well readable and extensible.",
+    "license": "MIT",
+    "homepage": "http://anotherwise.io",
+    "authors": [
+        {
+            "name": "marcelobns",
+            "email": "marcelobns@live.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=5.4.0",
+        "illuminate/database": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Anotherwise\\Bonus\\": ""
+        }
+    }
+}
