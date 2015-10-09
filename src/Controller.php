@@ -1,7 +1,7 @@
 <?php
 /**
 * @author Marcelo Barbosa
-* 
+*
 */
 namespace bonus;
 
@@ -11,7 +11,7 @@ class Controller {
 	}
 	function __call($method,$arguments) {
 		call_user_func_array(array($this->view, $method), $arguments);
-    }
+	}
 	function request($method){
 		return (strtolower($_SERVER['REQUEST_METHOD']) == strtolower($method));
 	}
@@ -28,13 +28,13 @@ class Controller {
 	}
 	function paginate($query, $limit = 15){
 		$page = 1;
-        if(isset($_GET['page'])){
-            $page = $_GET['page'];
-        }
-        $offset = ($page-1)*$limit;
+		if(isset($_GET['page'])){
+			$page = $_GET['page'];
+		}
+		$offset = ($page-1)*$limit;
 		$this->view->current_page = $page;
 		$this->view->count_items = $query->count();
 		$this->view->count_pages = ceil($this->view->count_items/$limit);
-        return $query->skip($offset)->take($limit)->get();
-    }
+		return $query->skip($offset)->take($limit)->get();
+	}
 }
