@@ -11,12 +11,6 @@ use Illuminate\Database\Capsule\Manager as Capsule;
 use Illuminate\Database\Eloquent\Model as Eloquent;
 
 class DatabaseCapsule extends Capsule {
-    function __construct(){
-        parent::__construct();
-        $this->addConnection(Database::connection());
-        $this->setAsGlobal();
-        $this->bootEloquent();
-    }
     function __construct($schema){
         parent::__construct();
         $this->addConnection(Database::connection($schema));
