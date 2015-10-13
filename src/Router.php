@@ -25,8 +25,7 @@ class Router {
 		$error = MODULES."Errors";
 
 		$action = @$map['action'];
-		$param = isset($map['param']) ? $map['param'] : array();
-
+		$param = isset($map['param']) ? $map['param'] : array();		
 		if(!Permission::check($url)){
 			$page = new $error;
 			$page->error403();
@@ -49,9 +48,6 @@ class Router {
 			$url = explode('/', $url);
 			foreach($map[$pin] as $key => $value) {
 				if(is_numeric($value)){
-					if($key == "controller"){
-						@$url[$value] .= "Controller";
-					}
 					if($key == "action" && empty($url[$value])){
 						@$url[$value] = "index";
 					}

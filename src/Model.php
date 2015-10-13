@@ -9,9 +9,10 @@ use Illuminate\Database\Eloquent\Model as Eloquent;
 use Illuminate\Pagination\Paginator;
 
 class Model extends Eloquent {
-
-    function __construct($schema = 'default'){        
-        new DatabaseCapsule($schema);
+    public $schema = 'default';
+    function __construct(){
+        $capsule = new DatabaseCapsule();
+        $capsule->con($this->schema);
     }
     function fill(array $attributes){
         parent::fill($attributes);

@@ -7,6 +7,7 @@ namespace Anotherwise\Bonus;
 
 class View {
 	private $compress = true;
+	private $script = '';
 
 	function render($title, $template, $layout = "default"){
 		$template = str_replace(".php", "", $template);
@@ -61,7 +62,7 @@ class View {
 		switch ($type) {
 			case 'select':
 				echo "<select id='$id' name='$name' $attributes>\n";
-				$is_assoc = \bonus\Util::is_assoc($options[0]);
+				$is_assoc = Util::is_assoc($options[0]);
 				foreach ($options as $item) {
 					$option = $item;
 					$text = $item;
@@ -107,13 +108,13 @@ class View {
 
     function css($resource = "default", $attributes = ""){
 		$resource = str_replace(".css", "", $resource);
-		$resource = RES.'css/'.$resource;
+		$resource = WEBROOT.'css/'.$resource;
 		return "<link rel='stylesheet' href='$resource.css' $attributes>\n";
     }
 
-	function js($resource = "default", $out_layout = false){
+	function js($resource = "default"){
 		$resource = str_replace(".js", "", $resource);
-		$resource = RES.'js/'.$resource;
+		$resource = WEBROOT.'js/'.$resource;
 		return "<script src='$resource.js'></script>\n";
     }
 
@@ -131,7 +132,7 @@ class View {
 	}
 
 	function script(){
-		echo @$this->script;
+		echo $this->script;
 	}
 
 	function setFlash($message = "", $type="info"){
