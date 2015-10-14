@@ -8,8 +8,8 @@ require_once(SRC."routes.php");
 
 class Router {
 	function __construct(){
-		spl_autoload_register(array($this, "autoloader"));
 		session_start();
+		spl_autoload_register(array($this, "autoloader"));
 		$this->mapping(@$_GET['url']);
 	}
 	function autoloader($class){
@@ -23,9 +23,9 @@ class Router {
 		$controller = ucfirst($map['controller']);
 		$controller = MODULES.$controller;
 		$error = MODULES."Errors";
-
 		$action = @$map['action'];
-		$param = isset($map['param']) ? $map['param'] : array();		
+		$param = isset($map['param']) ? $map['param'] : array();
+
 		if(!Permission::check($url)){
 			$page = new $error;
 			$page->error403();

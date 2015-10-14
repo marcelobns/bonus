@@ -9,7 +9,6 @@ use Illuminate\Database\Eloquent\Model as Eloquent;
 use Illuminate\Pagination\Paginator;
 
 class Model extends Eloquent {
-    public $schema = 'default';
     function __construct(){
         $capsule = new DatabaseCapsule();
         $capsule->con($this->schema);
@@ -17,10 +16,10 @@ class Model extends Eloquent {
     function fill(array $attributes){
         parent::fill($attributes);
     }
-    static function raw($conditions){
+    protected static function raw($conditions){
         foreach ($conditions as $key => $value) {
             $conditions[$key] = "'$value'";
         }
         return urldecode(http_build_query($conditions, '', ' and '));
-    }
+    }    
 }
