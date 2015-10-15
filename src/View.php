@@ -10,9 +10,10 @@ class View {
 	private $script = '';
 
 	function render($title, $template, $layout = "default"){
+		$this->title = $title;
 		$template = str_replace(".php", "", $template);
-		$template = SRC."/templates/$template.php";
-		$layout = SRC."/templates/layout/$layout.php";
+		$template = SRC."templates/$template.php";
+		$layout = SRC."templates/layouts/$layout.php";
 
 		ob_start(array($this,'compressor'));
 		if(file_exists($template)){
