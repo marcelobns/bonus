@@ -13,9 +13,9 @@ class View {
 		$template = str_replace(".php", "", $template);
 		$template = SRC."templates/$template.php";
 		$layout = SRC."templates/layouts/$layout.php";
-
 		ob_start(array($this,'compressor'));
 		if(file_exists($template)){
+			$this->template = $template;
 			$this->flash = $this->getFlash();
 			if(file_exists($layout)){
 				require $layout;
