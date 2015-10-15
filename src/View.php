@@ -9,8 +9,7 @@ class View {
 	private $compress = true;
 	private $script = '';
 
-	function render($title, $template, $layout = "default"){
-		$this->title = $title;
+	function render($template, $layout = "default"){
 		$template = str_replace(".php", "", $template);
 		$template = SRC."templates/$template.php";
 		$layout = SRC."templates/layouts/$layout.php";
@@ -21,6 +20,7 @@ class View {
 			if(file_exists($layout)){
 				require $layout;
 			} else {
+				echo "layout not found: $layout";
 				require $template;
 			}
 		} else {
