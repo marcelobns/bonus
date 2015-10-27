@@ -13,9 +13,10 @@ use Illuminate\Database\Eloquent\Model as Eloquent;
 class DatabaseCapsule extends Capsule {
     function con($schema){
         if(isset($schema)){
-            Database::$schema = $schema;
+            $this->addConnection(Database::connection($schema));
+        } else {
+            $this->addConnection(Database::connection());
         }
-        $this->addConnection(Database::connection());
         $this->setAsGlobal();
         $this->bootEloquent();
     }
