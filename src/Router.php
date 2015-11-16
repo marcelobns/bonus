@@ -8,7 +8,6 @@ require_once(SRC."routes.php");
 
 class Router {
 	function __construct(){
-		session_start();
 		spl_autoload_register(array($this, "autoloader"));
 		$this->mapping(@$_GET['url']);
 	}
