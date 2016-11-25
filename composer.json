@@ -16,5 +16,6 @@
     },
     "autoload": {
         "psr-4": {"Anotherwise\\Bonus\\": "src/"}
-    }
+    },
+    "version": "0.0.1-dev"
 }
