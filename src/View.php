@@ -57,13 +57,16 @@ class View {
 		return HREF.$dest;
 	}
 
-	function input($type, $name, $attributes = "", $options = array(), $key = array("id", "name")){
+	function input($type, $name, $attributes = "", $options = array(), $empty = true, $key = array("id", "name")){
 		$id = $this->getId($name);
 		$value = $this->getValue($name);
 		switch ($type) {
 			case 'select':
 			echo "<select id='$id' name='$name' $attributes>\n";
 			$is_assoc = Util::is_assoc(@$options[0]);
+			if($empty){
+				echo "<option value='' selected> Ø </option>";
+			}
 			foreach ($options as $item) {
 				$option = $item;
 				$text = $item;
