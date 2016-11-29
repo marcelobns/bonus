@@ -21,5 +21,5 @@ class Model extends Eloquent {
             $conditions[$key] = "'$value'";
         }
         return urldecode(http_build_query($conditions, '', ' and '));
-    }    
+    }
 }

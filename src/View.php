@@ -8,7 +8,7 @@ namespace Anotherwise\Bonus;
 class View {
 	private $compress = true;
 	private $script = '';
-	
+
 	function render($template, $layout = "default"){
 		$template = str_replace(".php", "", $template);
 		$template = SRC."templates/$template.php";
@@ -30,40 +30,40 @@ class View {
 		}
 		ob_end_flush();
 	}
-	
+
 	function includes($file){
 		$file = str_replace(".php", "", $file);
 		require SRC."/templates/includes/$file.php";
 	}
-	
+
 	function link($label = "Link", $dest = "", $attributes = ""){
 		$dest = $this->href($dest);
 		return "<a href='$dest' $attributes>$label</a>";
 	}
-	
+
 	function post($label = "Link", $dest = "", $param = "id=null", $attributes = "style='display:inline;'"){
 		$dest = $this->href($dest);
 		$attr = explode('=', $param);
-		
+
 		$form = "<form action='$dest' method='post' $attributes>";
 		$form .= "<input type='hidden' name='{$attr[0]}' value='{$attr[1]}'/>";
 		$form .= "<button class='btn-link' type='submit'>$label</button>";
 		$form .= "</form>";
-		
+
 		return $form;
 	}
-	
+
 	function href($dest){
 		return HREF.$dest;
 	}
-	
+
 	function input($type, $name, $attributes = "", $options = array(), $key = array("id", "name")){
 		$id = $this->getId($name);
 		$value = $this->getValue($name);
 		switch ($type) {
 			case 'select':
 			echo "<select id='$id' name='$name' $attributes>\n";
-			$is_assoc = Util::is_assoc($options[0]);
+			$is_assoc = Util::is_assoc(@$options[0]);
 			foreach ($options as $item) {
 				$option = $item;
 				$text = $item;
@@ -91,7 +91,7 @@ class View {
 			break;
 		}
 	}
-	
+
 	function getValue($name){
 		$name = rtrim(str_replace(array('[',']'), '.', $name), '.');
 		$keys = explode('.', $name);
@@ -101,48 +101,48 @@ class View {
 		}
 		return $value;
 	}
-	
+
 	function getId($name){
 		$name = rtrim(str_replace(array('[',']'), ' ', $name), ' ');
 		return str_replace(' ', '', ucwords($name));
 	}
-	
+
 	function css($resource = "default", $attributes = ""){
 		$resource = str_replace(".css", "", $resource);
 		$resource = WEBROOT.'css/'.$resource;
 		return "<link rel='stylesheet' href='$resource.css' $attributes>\n";
 	}
-	
+
 	function js($resource = "default"){
 		$resource = str_replace(".js", "", $resource);
 		$resource = WEBROOT.'js/'.$resource;
 		return "<script src='$resource.js'></script>\n";
 	}
-	
+
 	function jsBuffer($buffer){
 		return $buffer;
 	}
-	
+
 	function scriptStart(){
 		ob_start(array($this, 'jsBuffer'));
 	}
-	
+
 	function scriptEnd(){
 		$this->script = ob_get_contents();
 		ob_clean();
 	}
-	
+
 	function script(){
 		echo $this->script;
 	}
-	
+
 	function setFlash($message = "", $type="info"){
 		$_SESSION["flash"] = array(
 			"message"=>$message,
 			"class"=>$type
 		);
 	}
-	
+
 	function getFlash(){
 		$flash = @$_SESSION["flash"];
 		$_SESSION["flash"] = array(
@@ -151,7 +151,7 @@ class View {
 		);;
 		return $flash;
 	}
-	
+
 	function compressor($buffer){
 		if($this->compress){
 			$search = array(
@@ -168,7 +168,7 @@ class View {
 		}
 		return $buffer;
 	}
-	
+
 	function slugify($text){
 	  // replace non letter or digits by -
 	  $text = preg_replace('~[^\\pL\d]+~u', '-', $text);
