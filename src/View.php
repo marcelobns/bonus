@@ -97,7 +97,7 @@ class View {
 		$keys = explode('.', $name);
 		$value = @$this;
 		foreach ($keys as $i) {
-			$value = @$value->{$i};
+			$value = @$value->{strtolower($i)};
 		}
 		return $value;
 	}
