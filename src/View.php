@@ -74,7 +74,7 @@ class View {
 					$option = $item[$key[0]];
 					$text = $item[$key[1]];
 				}
-				if($option == $value || in_array($option, $value)){
+				if($value && ($option == $value || in_array($option, $value) )){
 					echo "<option value='$option' selected>$text</option>";
 				} else {
 					echo "<option value='$option'>$text</option>";
