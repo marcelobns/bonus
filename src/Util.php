@@ -6,8 +6,10 @@
 namespace Anotherwise\Bonus;
 
 class Util {
-    public static function dump($object){
-
+    public static function dump($obj){
+        echo "<pre>";
+        var_dump($obj);
+        echo "</pre>";
     }
     public static function date($format = "yyyy-m-d", $date = null){
 

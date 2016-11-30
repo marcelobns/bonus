@@ -18,6 +18,7 @@ class Router {
 	    }
 	}
 	function mapping($url){
+		$url = rtrim($url, '/');
 		$map = $this->getRoute($url, Routes::map());
 		$controller = ucfirst($map['controller']);
 		$controller = MODULES.$controller;
