@@ -85,7 +85,9 @@ class View {
 			case 'textarea':
 			echo "<textarea id='$id' name='$name' $attributes>$value</textarea>\n";
 			break;
-			case 'checkbox':			
+			case 'checkbox':
+			$checked = (empty($value) || $value) ? "" : "checked";
+			echo "<input id='{$id}H' type='hidden' name='$name' value='0' />\n";
 			echo "<input id='$id' type='$type' name='$name' value='1' $checked $attributes />\n";
 			break;
 			default:
